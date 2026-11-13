@@ -1,6 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 const url=process.env.NEXT_PUBLIC_SUPABASE_URL;
-const key=process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ||
+process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 export const db = url && key && !url.includes('YOUR-PROJECT') ? createClient(url,key) : null;
 export const money=(value:number|string=0)=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',minimumFractionDigits:0,maximumFractionDigits:2}).format(Number(value));
 export const dateTime=(value:string)=>new Date(value).toLocaleString('id-ID',{timeZone:'Asia/Jakarta',dateStyle:'medium',timeStyle:'short'});
